@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>grade</title>
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/styles.css"/>
+    </head>
+    <body style="background-color: beige;">
+      <%if(user_type=="all"){%>
+      <a class="back_class" href="/classList/created">ClassList<i class="fas fa-chevron-circle-right"></i></a>
+      <%}else{%>
+        <a class="back_class" href="/classList/enrolled">ClassList<i class="fas fa-chevron-circle-right"></i></a>
+
+        <%}%>
+        <section id="class_menu" class="fixed-top">
+            <div class="container">
+                      <ul class="navbar">
+                        <li class="nav-item">
+                          <a class="nav-link" href="/courseDetails/<%=courseId%>/created">Resources</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="/people/<%=courseId%>/created">People</a>
+                        </li>
+                          <li class="nav-item active">
+                            <a class="nav-link" href="/grade/<%=courseId%>/all">Grade</a>
+                          </li>
+                         
+                        
+                      </ul>
+                    
+            </div>
+           </section>
+         
+           <section id="grade" class="TeacherGrade">
+             <!--<%if(typeof dueResources!=='undefined'){%>
+              <%if(dueResources.length>0){%>
+              <table border class=" table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Student</th>
+                    <%dueResources.forEach(function(r){%>
+                    <th scope="col"><%=r.topic_name%></th>
+                    <%})%>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%enrolledSt.forEach(function(st){%>
+                  <tr>
+                    <td><%=st.student_name%></td>
+                    <%dueResources.forEach(function(r){%>
+                    <td>__/20</td>
+                    <%})%>
+                 
+                  </tr>
+                  <%})%>
+                </tbody>
+              </table>
+              <%}else{%>
+                <div class="no_work">
+                <h3 style="text-align: center;">No work is assigned yet</h3>
+              </div>
+                <%}%>
+         <%}%> -->
+         <div class="container">
+         <%if(typeof allGrades!=='undefined'){%>
+          <%if(allGrades.length>0){%>
+        <table border="1" class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Student name</th>
+              <th scope="col">Assignment name</th>
+              <th scope="col">Marks</th>
+            </tr>
+          </thead>
+          <tbody>
+           
+              <%allGrades.forEach(function(allgrade){%>
+            <tr>
+              <td><%=allgrade.student_name%></td>
+              <td><%=allgrade.topic_name%></td>
+              <td><%=allgrade.grade%>/<%=allgrade.points%></td>
+            </tr>
+            <%})%>
+         
+           
+          </tbody>
+        </table>
+        <%}else{%>
+          <div class="no_work">
+            <h3 style="text-align: center;">No work is assigned or graded yet</h3>
+          </div>
+          <%}%>
+        <%}%>
+      </div>
+          </section>
+           <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="/client.js"></script>
+    </body>
+</html>

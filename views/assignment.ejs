@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Assignment</title>
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/styles.css"/>
+    </head>
+    <body>
+        <section id="Assignment_menu_top">
+          <a href="/courseDetails/<%=findClass._id%>/enrolled">
+           <div id="left">
+             <div class="cname_and_csection">
+           <p class="cn"><%=findClass.classname%></p>
+           <p class="csec"><%=findClass.section%></p>
+          </div>
+           </div>
+          </a>
+           <div id="right">
+        
+        </div>
+           </section>
+     <div class="container">
+         <div class="assignment_body">
+         <div class="assignment_left">
+          <h4><%=findResource.topic_name%></h4>
+          <p style="color: #9ab0ca;font-family: Roboto,Arial,sans-serif;"><%=findClass.teacher_name%></p>
+          <p class="assignment_point"><%=findResource.points%> Points</p>
+          <p class="">Due:<%=findResource.due%></p>
+          <hr/>
+          <%if(findResource){%>
+            <p class="assignment_ins"><%=findResource.instruction%></p>
+          <div class="row">
+            <%findResource.files.forEach(function(file){%>
+          <a class="col-8 rscc" href="/<%=file.filepath%>"><%=file.filename%></a>
+          
+
+          <%})%>
+        </div>
+        <%}%>
+        <hr/>
+         </div>
+         <div class="assignment_right">
+          <div class="assignment_right_top">
+             <%if(!findSubmission){%>
+              <div class="your_work">
+                <div class="your_work_left">
+                  <h6>Your Work</h6>
+                </div>
+                <div class="your_work_right">
+                  <h6>Missing</h6>
+                </div>
+              </div>
+              
+            <form id="fileSubmit" method="POST" action="/courseDetails/<%=courseId%>/submit/<%=rscId%>" class="row" enctype="multipart/form-data">
+                <input type="file" id="" multiple name="submitFiles" class="col-12 addFile">
+                <input id="fileSubmitbtn" onclick="return confirm('Are you sure to turn in?')" class="btn btn-primary col-12" type="submit" value="Turn in">
+              </form>
+              <%}else{%>
+                <div class="your_work">
+                  <div class="your_work_left">
+                    <h6>Your Work</h6>
+                  </div>
+                  <div class="your_work_right">
+                    <h6><%=dueStatus%></h6>
+                  </div>
+                </div>
+               <div class="row">
+                    <%findSubmission.files.forEach(function(file){%>
+                  <a class="col-11 sf" href="/<%=file.filepath%>"><%=file.filename%></a>
+                  <%})%>
+                </div>
+                <div class="row">
+                <a class="col-11 unsubmit btn " role="button" onclick="return confirm('Are you sure to unsubmit?')" href="/courseDetails/<%=courseId%>/unsubmit/<%=rscId%>">Unsubmit</a>
+                </div>
+                <%}%>
+          </div>
+          <div class="assignment_right_bottom">
+            <%if(findSubmission){%>
+            <div class="private_comment">
+              
+              <form class="commentbox" action="/courseDetails/<%=findSubmission.course_id%>/submissions/<%=findSubmission.resource_id%>/comment/<%=findSubmission._id%>/one" method="POST">
+                  
+                  <div class="all_comments">
+                    <%if(typeof findComments!=='undefined'){%>
+                      <p><i class="fas fa-user"></i> <span><%=findComments.length%> Private Comments</span></p>
+                       <%findComments.forEach(function(com){%>
+                           <h6><%=com.user%></h6>
+                           <p class="comment_time"><%=com.current_time%></p>
+                           <p class="comment_status"><%=com.comment%></p>
+                           <%})%>
+                       <%}else{%>
+                       <p><i class="fas fa-user"></i><span>Private Comments</span></p>
+                       <%}%>
+                   </div>
+                  <hr/>
+                <textarea oninput="auto_grow(this)" rows="1" cols="30" wrap="physical" name="comment"></textarea>
+                <input  type="submit" id="sub">
+              </form>
+           </div>
+  <%}%>
+          </div>
+        </div>
+    </div>
+     </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="/client.js"></script>
+    <script>
+      function auto_grow(element) {
+          element.style.height = "5px";
+          element.style.height = (element.scrollHeight)+"px";
+      }
+      </script>
+        </body>
+</html>

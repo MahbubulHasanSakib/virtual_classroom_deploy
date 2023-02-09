@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Assignment</title>
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/styles.css"/>
+    </head>
+    <body>
+        <section id="Assignment_menu_top">
+          <a href="/courseDetails/<%=findClass._id%>/created">
+           <div id="left">
+             <div class="cname_and_csection">
+           <p class="cn"><%=findClass.classname%></p>
+           <p class="csec"><%=findClass.section%></p>
+          </div>
+           </div>
+          </a>
+           <div id="right">
+        
+        </div>
+           </section>
+     
+       <div class="students_works">
+        <div class="all_students_list">
+          <table  style="width: 100%;">
+            <tr>
+              <th>Students</th>
+              <th>Status</th>
+             
+            </tr>
+            <%if(enrolledStudents.length>0){%>
+            <%enrolledStudents.forEach(function(st,index){%>
+            <tr>
+              <td><span><img class="profile_img"src="/<%=findStudentPic[index]%>"/></span><%=st.student_name%></td>
+              <%if(submitStatus[index]=='Turned in'){%>
+              <td style="font-weight: bold;color: rgb(35, 122, 81);"><%=submitStatus[index]%></td>
+              <%}else if(submitStatus[index]=='Turned in Late'){%>
+                <td style="font-weight: bold;color: rgb(128, 177, 147);"><%=submitStatus[index]%></td>
+               <%}else{%>
+                <td style="font-weight: bold;color: rgb(139, 27, 27);"><%=submitStatus[index]%></td>
+                <%}%>
+            </tr>
+            <%})%>
+            <%}%>
+             
+          </table>
+       </div>
+         <div class="all_assignment_body">
+         <div class="assignment_left">
+          <h4><%=findResource.topic_name%></h4>
+          <p style="margin-top: 5px;" class="assignment_point"><%=findResource.points%> Points</p>
+          <p style="margin-top: 5px;" class="">Due:<%=findResource.due%></p>
+          <hr/>
+          <%if(findResource){%>
+            <p class="assignment_ins"><%=findResource.instruction%></p>
+          <div class="row">
+            <%findResource.files.forEach(function(file){%>
+          <a class="col-8 rscc" href="/<%=file.filepath%>"><%=file.filename%></a>
+          <%})%>
+        </div>
+        <%}%>
+        <hr/>
+         </div>
+         <h2>Student Work</h2>
+         <div class="assignment_right">
+             
+            <%if(typeof allSubmissions!=='undefined'){%>
+                <%if(allSubmissions.length==0){%>
+                    <h3 style="text-align: center;">No submissions to show</h1>
+                    <%}else{%>
+                      
+                      <div class="row">
+                <%allSubmissions.forEach(function(subFile,index){%>
+        <a href="/grade/checkAssignment/<%=subFile._id%>/<%=subFile.student_id%>">        
+        <div class="col-lg-4 col-xl-3 submittedFile singleFile">
+             <div class="assigment_card">
+              <div class="assigment_card_top">
+                <div class="assigment_card_top_left">
+               <img class="profile_img" src="/<%=profile_path[index]%>"/>
+                </div>
+                <div class="assigment_card_top_right">
+                <p><%=subFile.student_name%></p>
+                </div>
+              </div>
+              <div class="assigment_card_middle">
+              <%if(fileExtension[index]=='.pdf'){%>
+              <img src="/images/pdf-icon.png"/>
+              <%}else if(fileExtension[index]=='.png'||fileExtension[index]=='.jpg'||fileExtension[index]=='.jpeg'){%>
+                <img src="/images/image-icon.png"/>
+                <%}else if(fileExtension[index]=='.docx'){%>
+                  <img src="/images/doc_file-icon.png"/>
+                  <%}else if(fileExtension[index]=='.zip'||fileExtension[index]=='.rar'){%>
+                    <img src="/images/zip-icon.png"/>
+                    <%}else{%>
+                      <img src="/images/file-icon.png"/>
+                      <%}%>
+              </div>
+              <div class="assigment_card_bottom">
+               <p><%=subFile.files.length%> attachement</p>
+               <%if(subFile.grading_status=="graded"){%>
+                <p>Graded</p>
+                <%}else{%>
+                  <p><%=dueStatus[index]%></p>
+                  <%}%>
+              </div>
+             </div>
+        </div>
+      </a>
+    
+        <%})%>
+      </div>
+        <%}%>
+        <%}%>
+
+        </div>
+    </div>
+    
+  
+     </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="/client.js"></script>
+    <script>
+        function auto_grow(element) {
+            element.style.height = "5px";
+            element.style.height = (element.scrollHeight)+"px";
+        }
+        </script>
+        </body>
+</html>

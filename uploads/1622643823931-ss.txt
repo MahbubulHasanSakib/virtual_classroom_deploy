@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>course details</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/styles.css"/>
+    </head>
+    <body style="background-color: beige;">
+        <section id="student_submission" class="fixed-top">
+            <div class="container">
+                <h1 style="text-align: center;">Topic:<%=Topic%></h1>
+                
+                <%if(typeof allSubmissions!=='undefined'){%>
+                    <%if(allSubmissions.length==0){%>
+                        <h3 style="text-align: center;">No submissions to show</h1>
+                        <%}else{%>
+                    <div class=" singleFile">
+                                <div class="row">
+                    <%allSubmissions.forEach(function(subFile){%>
+            
+                    
+                    <%subFile.files.forEach(function(file){%>
+                        <a class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 rsc_file" href="\<%=file.filepath%>"><%=file.filename%></a>
+                        <%})%>
+                    
+                   
+                    <%if(user_type=='Teacher' && subFile.grading_status=='not graded'){%>
+                        <div class="grade_input">
+                            <form action="/grade/<%=courseId%>/graded/<%=resourceId%>/<%=Topic%>/<%=subFile.student_id%>/<%=subFile.student_name%>/<%=Points%>" method="POST">
+                                <input type="text" placeholder="Obtained grade" name="grade"/>
+                                <input type="submit" class="grade_btn" value="Assign grade" class="btn-success">
+                            </form>
+                        </div>
+            
+                        <%}%>
+                        <p class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12"><%=subFile.submitTime%></p>
+                        <%if(subFile.grading_status=='graded'){%>
+                        <p class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="color: rgb(5, 59, 151);"><%=subFile.grading_status%></p>
+                        <%}else{%>
+                            <p class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="color: rgb(228, 24, 24);"><%=subFile.grading_status%></p>
+                        <%}%>
+                        <%if(user_type=='Student'){%>
+                         <a class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 unsubmit btn btn-success" role="button" onclick="return confirm('Are you sure to unsubmit?')" href="/courseDetails/<%=courseId%>/unsubmit/<%=resourceId%>">Unsubmit</a>
+                        <%}%>
+                    </div>
+            <%})%>
+            <%}%>
+            <%}%>
+    
+        </div>
+    </div>
+            
+           </section>
+           <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="/client.js"></script>
+    </body>
+</html>

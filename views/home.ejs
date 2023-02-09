@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Home</title>
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+	      <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/styles.css"/>
+    </head>
+    <body>
+       <section id="menu" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#"><img src="images/navbar_logo.png" alt="navbar"/></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#content">Services</a>
+                    </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                      </li>
+                    
+                  </ul>
+                  <form class="form-inline my-2 my-lg-0">
+                    <a class="btn btn-outline-success my-2 my-sm-0" href="/login" role="button">Login</a>
+                    <a class="btn btn-outline-success my-2 my-sm-0" href="/register" role="button">Sign Up</a>
+                  </form>
+                </div>
+              </nav>
+        </div>
+       </section>
+   
+       <section id="feature">
+       </section>
+         <%if(messages.info){%>
+          <div class="alert alert-success alert-dismissible fade show activate_mail">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong><%=messages.info%></strong>
+          </div>
+          <%}%>
+
+       <section id="content">
+         <h2>Everything you need to teach online</h2>
+         <div class="container">
+         <div class="row">
+           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+             <div class="contentCard">
+                 <h4>Upload lesson materials</h4>
+                 <i class="far fa-file-video"></i>
+                 <p>Virtual Classroom makes it easy to upload,save and instantly access your multimedia
+                   content to enrich and enhance your Classes.
+                 </p>
+                </div>
+           </div>
+           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+            <div class="contentCard">
+                <h4>Download Free</h4>
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <p>Virtual Classroom delivers quality audio / video simply through the web-browser 
+                  so you no longer have to spend time on software. 
+                </p>
+               </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+            <div class="contentCard">
+                <h4>Video Recording</h4>
+                <i class="fa fa-play-circle" aria-hidden="true"></i>
+                <p>Teachers and schools see recording as an opportunity to ensure teacher quality and 
+                  help student review.
+                </p>
+               </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+            <div class="contentCard">
+                <h4>Assessment Submission</h4>
+                <i class="far fa-newspaper"></i>
+                <p>It is a digital platform which is designed to provide a complete 
+                  environment to develop, manage and submit any assignment for all.
+                </p>
+               </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+            <div class="contentCard">
+                <h4>Online Examination</h4>
+                <i class="far fa-edit"></i>
+                <p>Virtual Classroom is the online 
+                  exam system with best in class features and data security. 
+                </p>
+               </div>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+            <div class="contentCard">
+                <h4>Post to class Stream</h4>
+                <i class="fas fa-address-card"></i>
+                <p>Students and Teachers can post and comment to the class stream
+                  in this virtual system.
+                </p>
+               </div>
+          </div>
+         </div>
+        </div>
+       </section>
+       <section id="contact">
+        <h2>Contact Us</h2>
+        <div class="container">
+        <div class="contact-form">
+          <div class="contact-image">
+              <img src="https://image.ibb.co/kUagtU/rocket_contact.png" alt="rocket_contact"/>
+          </div>
+          <form method="POST" action="/contact">
+              <h3>Drop Us a Message</h3>
+              <%if(messages.error){%>
+                <p class="alert alert-danger"><%=messages.error%></p>
+                <%}%>
+                <%if(messages.success){%>
+                  <div class=" alert alert-success" role="alert">
+                    <span><%=messages.success%></span>
+                  </div>
+                  <%}%>
+             <div class="row">
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <input type="text" name="Name" class="form-control" placeholder="Your Name *" value="" />
+                      </div>
+                      <div class="form-group">
+                          <input type="email" name="Email" class="form-control" placeholder="Your Email *" value="" />
+                      </div>
+                      <div class="form-group">
+                          <input type="text" name="Phone" class="form-control" placeholder="Your Phone Number *" value="" />
+                      </div>
+                      
+                  </div>
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <textarea name="txtMsg" class="form-control" placeholder="Your Message *" style="width: 100%; height: 150px;"></textarea>
+                      </div>
+                  </div>
+              </div>
+              <div class="form-group">
+                <input type="submit" name="btnSubmit" class="btnContact" value="Send Message" />
+            </div>
+          </form>
+</div>
+</div>
+       </section>
+       <section id=footer>
+        <footer class="footer">
+          <div class="container">
+          <div class=" bottom_border">
+          <div class="row ">
+          <div class=" col-sm-12 col-md-6 col-lg-6  col-xl-6 footer_left">
+          <h5 class="headin5_amrc col_white_amrc pt2">Find us</h5>
+          <!--headin5_amrc-->
+          <p class="mb10">We are here to serve you since 2020</p>
+          <p><i class="fa fa-location-arrow"></i>Chawkbazar,Chittagong</p>
+          <p><i class="fa fa-phone"></i> +8801812346095 </p>
+          <p><i class="fa fa fa-envelope"></i>mh@gmail.com</p>
+          
+          </div>
+          
+          
+          <div class=" col-sm-12 col-md-6 col-lg-6  col-xl-6 footer_right">
+          <h5 class="headin5_amrc col_white_amrc pt2">Follow us</h5>
+          
+          <ul class="footer_ul2_amrc">
+          <li><a href="#"><i class="fab fa-twitter fleft padding-right"></i> </a><p><a href="https://www.twitter.com/">Twitter link</a></p></li>
+          <li><a href="#"><i class="fab fa-facebook fleft padding-right"></i> </a><p><a href="https://www.facebook.com/">Facebook link</a></p></li>
+          <li><a href="#"><i class="fab fa-instagram fleft padding-right"></i> </a><p><a href="https://www.instagram.com/">Instagram link</a></p></li>
+          </ul>
+    
+          </div>
+          </div>
+          </div>
+          
+          
+          <div class="container">
+          <ul class="foote_bottom_ul_amrc">
+          <li><a href="#">Home</a></li>
+          <li><a href="#content">Services</a></li>
+          <li><a href="#contact">Contact</a></li>
+          </ul>
+          <!--foote_bottom_ul_amrc ends here-->
+          <p class="text-center">Copyright @2021 | Developed  by <a href="#"> Company Name</a></p>
+          
+          <ul class="social_footer_ul">
+          <li><a href="http://facebook.com"><i class="fab fa-facebook-f"></i></a></li>
+          <li><a href="http://twitter.com"><i class="fab fa-twitter"></i></a></li>
+          <li><a href="http://linkedin.com"><i class="fab fa-linkedin"></i></a></li>
+          <li><a href="http://instagram.com"><i class="fab fa-instagram"></i></a></li>
+          </ul>
+          <!--social_footer_ul ends here-->
+          </div>
+        </div>
+          </footer>
+       </section>
+       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+       <script src="/client.js"></script>
+           </body>
+</html>

@@ -1,0 +1,39 @@
+Software requirement:The descriptions of the services that software will provide and the constraints under which it must operate.
+
+Requirements Engineering:The process of establishing the services that software will provide the customers and the constraints under it will be develped or operated.
+
+**Types of requirements:
+1.User requirements:Statements in natural language of users plus diagram 
+2.System requirements:A structured document setting out detailed descriptions of the system's functions, services and operational constraints(contact between client and developer)
+
+**Software Specification: A detailed software description which can serve as a basis for a design or implementation which is needed for developers.
+
+
+**Software requirement is a field within software engineering that deals with establishing the needs of stakeholders that are to be solved by software.
+
+**software requirenments:
+1.Functional requirements
+2.Non-functional requirements/quality attributes
+3.Domain requirements
+
+**Parts of non-functional requirements:
+1.Product requirement
+2.Organisational requirement
+3.External requirements
+
+**Property of non-func req:
+1.speed
+2.Size
+3.Ease of use
+4.Reusability
+5.Robustness
+6.Portabiliy
+
+**Software design concepts:
+1.Abstraction
+2.refinement
+3.Modularity
+
+**Dynamic Testing:
+1.Black Box testing-(func/non-func)
+2.White Box Testing-(data flow/control testing)

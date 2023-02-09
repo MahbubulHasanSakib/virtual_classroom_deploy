@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Assignment</title>
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/styles.css"/>
+    </head>
+    <body>
+      <div id="checkwork">
+        <div class="checkwork_left">
+            <div class="checkwork_left_top">
+                <div class="checkwork_topic">
+                 <a href="http://localhost:3000/courseDetails/<%=findResource.course_id%>/showAssignmentandSubmissions/<%=findResource._id%>"><%=findResource.topic_name%></a>
+                </div>
+                <div class="checkwork_name_status">
+                <div class="checkwork_left_top_name">
+          <p><%=findSubmission.student_name%></p>
+                </div>
+                <div class="checkwork_left_top_status">
+                    <%if(findSubmission.grading_status==="not graded"){%>
+          <p style="color: rgb(21, 138, 21);font-weight: bold;"><%=dueStatus%></p>
+          <%}else if(findSubmission.grading_status==="graded"){%>
+            <p style="color: rgb(21, 138, 21);font-weight: bold;">Graded</p>
+            <%}%>
+                </div>
+            </div>
+        </div>
+           
+            <div class="checkwork_left_bottom">
+              <%if(fileExt[0]!==".doc" && fileExt[0]!==".docx" && fileExt[0]!==".zip"){%>
+                <iframe id="iframe_file" src="/<%=findSubmission.files[0].filepath%>" width="100%" style="height:600px;">
+                </iframe>
+                <%}else{%>
+                  <iframe id="iframe_file" src="" width="100%" style="height:600px;">
+                  </iframe>
+                  <%}%>
+            </div>
+        </div>
+
+        <div class = "vertical"></div>
+        
+        <div class="checkwork_right">
+          <h5>Files</h5>
+          <p>Turned in <%=findSubmission.submitTime%></p>
+          <div class="check_files">
+        <%findSubmission.files.forEach(function(subFile,index){%>
+          <%if(index==0){%>
+          <p  class="col-8 rscc file_active" ><%=subFile.filename%><span class="hidden_filepath" style="display: none;"><%=subFile.filepath%></p>
+          <%}else{%>
+            <p  class="col-8 rscc" ><%=subFile.filename%><span class="hidden_filepath" style="display: none;"><%=subFile.filepath%></p>
+            <%}%>
+         <%})%>
+        </div>
+        <div class="grade_input">
+          <p>Grade</p>
+          <%if(findgrade){%>
+            <input type="text" disabled value="<%=findgrade.grade%>/<%=findgrade.points%>" name="grade"/>
+          <%}else{%>
+            <form action="/grade/<%=findResource.course_id%>/graded/<%=findResource._id%>/<%=findResource.topic_name%>/<%=findSubmission.student_id%>/<%=findSubmission.student_name%>/<%=findResource.points%>" method="POST">
+                <input type="text" placeholder="/<%=findResource.points%>" name="grade"/>
+                <input type="submit" class="grade_btn" value="Assign grade" class="btn-success">
+            </form>
+            <%}%>
+        </div>
+        <%if(findSubmission){%>
+          <div class="private_comment">
+            
+            <form class="commentbox" action="/courseDetails/<%=findSubmission.course_id%>/check_submissions/<%=findSubmission.resource_id%>/comment/<%=findSubmission._id%>/<%=findSubmission.student_id%>" method="POST">
+                
+                <div class="all_comments">
+                  <%if(typeof findComments!=='undefined'){%>
+                    <p><i class="fas fa-user"></i> <span><%=findComments.length%> Private Comments</span></p>
+                     <%findComments.forEach(function(com){%>
+                         <h6><%=com.user%></h6>
+                         <p class="comment_time"><%=com.current_time%></p>
+                         <p class="comment_status"><%=com.comment%></p>
+                         <%})%>
+                     <%}else{%>
+                     <p><i class="fas fa-user"></i><span>Private Comments</span></p>
+                     <%}%>
+                 </div>
+                <hr/>
+              <textarea oninput="auto_grow(this)" rows="1" cols="30" wrap="physical" name="comment"></textarea>
+              <input  type="submit" id="sub">
+            </form>
+         </div>
+<%}%>
+        </div>
+      </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="/client.js"></script>
+    <script>
+      function auto_grow(element) {
+          element.style.height = "5px";
+          element.style.height = (element.scrollHeight)+"px";
+      }
+      
+      </script>
+        </body>
+</html>
